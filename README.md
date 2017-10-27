@@ -53,7 +53,9 @@ int main(){
 labelを`lst:hogehoge`のように指定することで，listings環境を利用しても`[@lst:hogehoge]`のように引用することができます．
 
 ## ライセンス
-MIT
+GPLv2
+- template.tex
+  - (C) 2006-2017 John MacFarlane (jgm@berkeley.edu)
 
 ## 参考リンク
 - [Texで作成するレポートの見本](http://www.dml.cs.gunma-u.ac.jp/~seki/lec/rep-sample2.txt)
