@@ -1,0 +1,37 @@
+#!/bin/bash
+SCRIPT_DIR=$(cd $(dirname $0)/..; pwd)
+# usage
+cmdname=`basename $0`
+function usage()
+{
+  echo "Usage: ${cmdname} -o output input" 1>&2
+}
+
+# check options
+topt=FALSE
+while getopts o: option
+do
+  case ${option} in
+    o)
+      output=${OPTARG}
+      ;;
+    *)
+      usage
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+# check arguments
+if [ $# -ne 1 ] || [ "${output}" = "" ]; then
+  usage
+  exit 1
+fi
+input="$1"
+
+# main
+pandoc -F pandoc-crossref ${input}  -o ${output} --template=${SCRIPT_DIR}/template.tex --latex-engine=lualatex -N --listings -M "${SCRIPT_DIR}/config/crossref_config.yaml"
+exit 0
+
+
