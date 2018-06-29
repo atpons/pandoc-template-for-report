@@ -1,33 +1,4 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
-\usepackage{listings}
-\renewcommand{\lstlistingname}{ソースコード}
-\lstdefinestyle{customc}{
-  belowcaptionskip=1\baselineskip,
-  breaklines=true,
-  frame={tb},
-  xleftmargin=\parindent,
-  language=C,
-  showstringspaces=false,
-  basicstyle=\footnotesize\ttfamily,
-  keywordstyle=\bfseries\color{green!40!black},
-  commentstyle=\itshape\color{purple!40!black},
-  identifierstyle=\color{blue},
-  stringstyle=\color{orange},
-}
-
-\lstdefinestyle{customasm}{
-  belowcaptionskip=1\baselineskip,
-  frame=L,
-  xleftmargin=\parindent,
-  language=[x86masm]Assembler,
-  basicstyle=\footnotesize\ttfamily,
-  commentstyle=\itshape\color{purple!40!black},
-}
-\lstset{escapechar=@,style=customc}
-
-\oddsidemargin=0mm % original
-\textwidth=165mm % original
-
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
@@ -36,6 +7,14 @@ $if(fontfamily)$
 $else$
 \usepackage{lmodern}
 $endif$
+
+%%%% Pandoc-template for Report %%%%
+\usepackage{listings}
+\usepackage{color}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{ascmac}
+
 $if(linestretch)$
 \usepackage{setspace}
 \setstretch{$linestretch$}
@@ -150,6 +129,43 @@ $endif$
 $if(lhs)$
 \lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
 $endif$
+
+%%% Pandoc-template for Report Settings (Code) %%%
+\makeatletter
+\def\lst@lettertrue{\let\lst@ifletter\iffalse}
+\makeatother
+
+
+\lstset{
+language = C,
+numbers = left,
+numberstyle = {\tiny \emph},
+numbersep = 10pt,
+breaklines = true,
+breakindent = 40pt,
+frame = tlRB,
+frameround = ffft,
+framesep = 3pt,
+rulesep = 1pt,
+rulecolor = {\color{black}},
+rulesepcolor = {\color{white}},
+flexiblecolumns = true,
+keepspaces = false,
+basicstyle = \scriptsize,
+identifierstyle = \itshape\scriptsize,
+commentstyle = \fontfamily{ptm}\selectfont\scriptsize,
+stringstyle = \scshape\scriptsize,
+tabsize = 4
+}
+% \lstset{
+%    breaklines=true,
+%    frame=single,
+%    basicstyle=\small\ttfamily,
+%    tabsize=4
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
@@ -178,15 +194,15 @@ $if(strikeout)$
 % avoid problems with \sout in headers with hyperref:
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
-%$if(indent)$
-%$else$
-%\IfFileExists{parskip.sty}{%
-%\usepackage{parskip}
-%}{% else
-%\setlength{\parindent}{0pt}
-%\setlength{\parskip}{6pt plus 2pt minus 1pt}
-%}
-%$endif$
+$if(indent)$
+$else$
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+$endif$
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -251,6 +267,7 @@ $endif$
 \date{$date$}
 
 \begin{document}
+
 \vspace*{\stretch{1}}
   \begin{center}
     $if(title)$
@@ -282,14 +299,9 @@ $endif$
      \vspace{\stretch{2}}
   }
   \end{center}
+
 \thispagestyle{empty}
 \newpage
-\setcounter{page}{1}
-$if(abstract)$
-\begin{abstract}
-$abstract$
-\end{abstract}
-$endif$
 
 $for(include-before)$
 $include-before$
@@ -334,3 +346,4 @@ $include-after$
 
 $endfor$
 \end{document}
+

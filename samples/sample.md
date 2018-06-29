@@ -32,7 +32,7 @@ $1 + 1 = 2$
 
 # 付録
 ## プログラム1
-``` {label=lst:helloworld .numberLines caption="Hello World" style=customc .listings}
+``` {label=lst:helloworld .numberLines caption="Hello World" .listings}
 #include <stdio.h>
 int main(){
   printf("Hello, World!");
